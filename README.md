@@ -1,6 +1,8 @@
 # multiflash-mcp
 
-An MCP server that exposes the KBC Multiflash thermodynamic engine to LLM clients (Claude, etc.) through the Model Context Protocol — so an LLM can do rigorous PVT, flash, and phase-equilibrium calculations as tool calls instead of guessing at thermodynamic tables.
+This is the LLM-facing side of my Multiflash work. It exposes KBC Multiflash through the Model Context Protocol so an agent can ask for PVT, flash, phase-boundary, and transport calculations as typed tool calls instead of trying to infer thermodynamics from text.
+
+The point is not to make the model "know" thermodynamics. The point is to give it a reliable engineering tool, clear units, structured errors, and enough guardrails that a human engineer can see what happened.
 
 ## What's technically interesting
 
@@ -77,4 +79,4 @@ KBC Multiflash itself is the commercial engine — I do not own or distribute it
 
 ## See also
 
-If you want the same thermodynamic capabilities at a shell prompt instead of through an MCP client, see [`multiflash-cli`](../multiflash-cli/) — a sibling project with subcommands like `mfcli sat-pressure --t 0`, stable exit codes, and `--json` output for scripting. Different surface, same engine.
+If you want the same thermodynamic capabilities at a shell prompt instead of through an MCP client, see [`multiflash-cli`](https://github.com/Ahmed-Hassan-portfolio/multiflash-cli). It has subcommands like `mfcli sat-pressure --t 0`, stable exit codes, and `--json` output for scripts and CI jobs. Different surface, same engine.
