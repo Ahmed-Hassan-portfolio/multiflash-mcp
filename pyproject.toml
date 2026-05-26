@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "multiflash-mcp"
+version = "0.1.0"
+description = "MCP server exposing the KBC Multiflash thermodynamic engine to LLM clients"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "Ahmed Hassan", email = "a.sayed90@gmail.com" }]
+keywords = ["mcp", "multiflash", "thermodynamics", "pvt", "flash-calculation"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: Microsoft :: Windows",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = [
+    "mcp",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio",
+]
+examples = [
+    "matplotlib",
+    "numpy",
+]
+
+[project.scripts]
+multiflash-mcp = "mcp_server.server:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["mcp_server*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+markers = [
+    "requires_multiflash: test needs Multiflash DLL + license to run",
+]

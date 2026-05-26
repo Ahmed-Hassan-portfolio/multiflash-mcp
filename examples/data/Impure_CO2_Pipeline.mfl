@@ -1,0 +1,49 @@
+#Multiflash version: 7.5.10  July 2024  #
+#Date: Fri 12 December 2025        Time:   20:24:47  #
+remove all;
+units temperature K pressure Pa enthalpy J/mol entropy J/mol/K volume m3/mol 
+amounts mol viscosity Pas thcond W/m/K surten N/m diffusion m2/s;
+datum enthalpy compound entropy compound; 
+set fractions; chardata INFOCHAR TBSOEREIDE; 
+puredata Infodata; 
+chardata Infochar TbSoereide; 
+Components overwrite
+1 ARGON 
+2 HYDROGEN 
+3 OXYGEN 
+4 NITROGEN 
+5 "CARBON DIOXIDE" 
+6 WATER 
+7 "SULPHUR DIOXIDE" 
+8 METHANE 
+9 "NITROUS OXIDE" ; 
+bipdata INFOBIPS; 
+BipSet GERGBIP 1 quadratic gergt none; 
+BipSet "GERGBIP-2" 1 quadratic gergv none; 
+BipSet "GERGBIP-3" 1 constant gergf none; 
+BipSet "GERGBIP-4" 1 constant gergbdf none; 
+model MGERG_CG_Infochem CSMA GERG_CG_INFOCHEM GERGBIP "GERGBIP-2" 
+"GERGBIP-3" "GERGBIP-4"; 
+model VSuperTRAPP SPVISC LFIT; 
+model LJ_Visc LJVISC LJCORR MGERG_CG_Infochem; 
+model TCSuperTRAPP SPTHCOND SPTHCOND; 
+model MSUTTON SUTTON SUT MGERG_CG_Infochem; 
+PD GAS gas MGERG_CG_Infochem MGERG_CG_Infochem MGERG_CG_Infochem LJ_Visc 
+TCSuperTRAPP MSUTTON; 
+PD LIQUID1 liquid MGERG_CG_Infochem MGERG_CG_Infochem MGERG_CG_Infochem 
+LJ_Visc TCSuperTRAPP MSUTTON; 
+keys LIQUID1 "*"; 
+PD LIQUID2 liquid MGERG_CG_Infochem MGERG_CG_Infochem MGERG_CG_Infochem 
+LJ_Visc TCSuperTRAPP MSUTTON; 
+keys LIQUID2 "*"; 
+PD WATER liquid MGERG_CG_Infochem MGERG_CG_Infochem MGERG_CG_Infochem 
+VSuperTRAPP TCSuperTRAPP MSUTTON; 
+keys WATER AQUEOUS; 
+amounts 0.4 0.75 0.004 3.15 95. 0.007 0.0005 1.43825 0.00025; 
+tolamounts 0. 0. 0. 0. 0. 0. 0. 0. 0.; 
+Temperature 277.15; 
+Pressure 5000000; 
+units temperature degC pressure bar enthalpy J/mol entropy J/mol/K 
+volume m3/mol density kg/m3 amounts mole viscosity Pas thcond W/m/K 
+surten N/m diffusion m2/s GOR sm3/sm3; 
+set physprops 2VCS;

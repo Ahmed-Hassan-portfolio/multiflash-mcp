@@ -1,0 +1,68 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+*.egg
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+nul
+
+# Runtime
+logs/
+mcp_server/logs/
+*.log
+
+# Outputs
+*.png
+*.jpg
+*.jpeg
+*.pdf
+*.db
+*.sqlite
+
+# Local data overrides
+data/
+!examples/data/
+
+# Local config
+local_config.py
+.claude/
+
+# Internal working notes — not for publication
+CODEX_GITHUB_REVIEW.md
+
+# Commercial binaries and license artifacts — defensive (these must NEVER ship)
+*.dll
+*.exe
+*.lic
+*.license
+*.key
+*.pem

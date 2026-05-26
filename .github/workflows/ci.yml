@@ -1,0 +1,40 @@
+name: ci
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  test:
+    name: tests (no Multiflash DLL)
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install package (with dev extras)
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+
+      - name: Server smoke import
+        run: python -c "import mcp_server.server; print('server import ok')"
+
+      - name: Run structural tests
+        # conftest.py runs a DLL/package availability check at collection
+        # time. Tests marked @pytest.mark.requires_multiflash auto-skip when
+        # the multiflash Python package is not importable OR the DLL file at
+        # MULTIFLASH_DLL_PATH does not exist. The CI runner has neither, so
+        # those tests skip cleanly. The license itself is not exercised by
+        # the skip check.
+        run: python -m pytest -q

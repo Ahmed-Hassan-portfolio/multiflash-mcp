@@ -1,0 +1,33 @@
+#Multiflash version: 7.5.10  July 2024  #
+#Date: Wed 07 January 2026        Time:   14:57:55  #
+remove all;
+units temperature K pressure Pa enthalpy J/mol entropy J/mol/K volume m3/mol 
+amounts mol viscosity Pas thcond W/m/K surten N/m diffusion m2/s;
+datum enthalpy compound entropy compound; 
+set fractions; chardata INFOCHAR TBSOEREIDE; 
+puredata Infodata; 
+chardata Infochar TbSoereide; 
+Components overwrite
+1 "CARBON DIOXIDE" ; 
+bipdata INFOBIPS OILANDGAS4; 
+BipSet PR78BIP 1 constant eos none; 
+BipSet LGSTBIP 1 constant eos none; 
+model MPR78 PRA PSAT78 LDEN VDW PR78BIP; 
+model VSuperTRAPP SPVISC LFIT; 
+model TCSuperTRAPP SPTHCOND SPTHCOND; 
+model STLGST LGST MPR78 LGSTBIP; 
+PD GAS gas MPR78 MPR78 MPR78 VSuperTRAPP TCSuperTRAPP STLGST; 
+PD LIQUID1 liquid MPR78 MPR78 MPR78 VSuperTRAPP TCSuperTRAPP STLGST; 
+keys LIQUID1 "*"; 
+PD LIQUID2 liquid MPR78 MPR78 MPR78 VSuperTRAPP TCSuperTRAPP STLGST; 
+keys LIQUID2 "*"; 
+PD WATER liquid MPR78 MPR78 MPR78 VSuperTRAPP TCSuperTRAPP STLGST; 
+keys WATER AQUEOUS; 
+amounts 100.; 
+tolamounts 0.; 
+Temperature 277; 
+Pressure 5000000; 
+units temperature K pressure bar enthalpy J/mol entropy J/mol/K volume 
+m3/kg density kg/m3 amounts mole viscosity Pas thcond W/m/K surten N/m 
+diffusion m2/s GOR sm3/sm3; 
+set physprops 2VCS;
