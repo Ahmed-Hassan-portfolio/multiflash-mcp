@@ -80,3 +80,5 @@ KBC Multiflash itself is the commercial engine — I do not own or distribute it
 ## See also
 
 If you want the same thermodynamic capabilities at a shell prompt instead of through an MCP client, see [`multiflash-cli`](https://github.com/Ahmed-Hassan-portfolio/multiflash-cli). It has subcommands like `mfcli sat-pressure --t 0`, stable exit codes, and `--json` output for scripts and CI jobs. Different surface, same engine.
+
+For the broader agentic workflow, [`Olga-automation`](https://github.com/Ahmed-Hassan-portfolio/Olga-automation) shows how an LLM-driven simulator workflow can call documentation tools, thermodynamic tools, and simulator automation through controlled interfaces instead of free-form shell access.
